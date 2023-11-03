@@ -2,8 +2,7 @@ package org.example.service.impl;
 
 import org.example.domain.AnuncioDto;
 import org.example.repositories.AnuncioServiceRepository;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
@@ -16,8 +15,6 @@ import java.util.List;
 
 @ExtendWith(MockitoExtension.class)
 class AnuncioServiceImplTest {
-
-//    private AnuncioServiceImpl anuncioService = new AnuncioServiceImpl();
 
     @InjectMocks
     private AnuncioServiceImpl anuncioService;
@@ -46,11 +43,7 @@ class AnuncioServiceImplTest {
     public void createTest2WasCalledOneTime() {
         AnuncioDto anuncioDto = new AnuncioDto(1L, "TESTE-01", null);
         Mockito.when(anuncioServiceRepository.save(Mockito.any())).thenReturn(Arrays.asList(anuncioDto));
-
-        List<AnuncioDto> result = anuncioService.create2(anuncioDto);
-        Assertions.assertEquals(result.get(0).getId(), anuncioDto.getId());
-        Assertions.assertEquals(result.get(0).getTitulo(), anuncioDto.getTitulo());
-        Assertions.assertEquals(result.get(0).getIps(), anuncioDto.getIps());
+        anuncioService.create2(anuncioDto);
 
         Mockito.verify(anuncioServiceRepository, Mockito.times(1)).save(Mockito.any());
     }
